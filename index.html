@@ -52,19 +52,20 @@
     }
 
     function submitForm(serviceType) {
-        if (serviceType === 'loan') {
-            const loanData = {
-                giver: document.getElementById('loan-giver').value,
-                amount: document.getElementById('loan-amount').value,
-                interest: document.getElementById('loan-interest').value,
-                term: document.getElementById('loan-term').value,
-                responsible: document.getElementById('loan-responsible').value,
-                receiver: document.getElementById('loan-receiver').value
-            };
-            tg.sendData(JSON.stringify(loanData)); // Отправляем данные в Telegram бота
-        }
-        // Добавьте логику для других услуг, если это необходимо
+    if (serviceType === 'loan') {
+        const loanData = {
+            giver: document.getElementById('loan-giver').value,
+            amount: document.getElementById('loan-amount').value,
+            interest: document.getElementById('loan-interest').value,
+            term: document.getElementById('loan-term').value,
+            responsible: document.getElementById('loan-responsible').value,
+            receiver: document.getElementById('loan-receiver').value
+        };
+        tg.sendData(JSON.stringify(loanData));
+        alert("Форма отправлена в Telegram бота.");
     }
+    // Добавьте логику для других услуг, если это необходимо
+}
 
     // Настройка Telegram Web App
     tg.expand(); // Расширяем на весь экран, если нужно
