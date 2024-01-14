@@ -1,45 +1,58 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
-	<title>Document</title>
+    <meta charset="utf-8">
+    <title>Telegram Service Bot</title>
+    <script src="https://tg.dev/js/telegram-web-app.js"></script>
 </head>
 <body>
-	<div class="container">
-		<div class="inner">
-			<div class="item">
-				<img src="goods-images/1.jpg" alt="" class="img">
-				<button class="btn" id="btn1">Заказать</button>
-			</div>
-			<div class="item">
-				<img src="goods-images/2.jpg" alt="" class="img">
-				<button class="btn" id="btn2">Заказать</button>
-			</div>
-			<div class="item">
-				<img src="goods-images/3.jpg" alt="" class="img">
-				<button class="btn" id="btn3">Заказать</button>
-			</div>
-			<div class="item">
-				<img src="goods-images/4.jpg" alt="" class="img">
-				<button class="btn" id="btn4">Заказать</button>
-			</div>
-			<div class="item">
-				<img src="goods-images/5.jpg" alt="" class="img">
-				<button class="btn" id="btn5">Заказать</button>
-			</div>
-			<div class="item">
-				<img src="goods-images/6.jpg" alt="" class="img">
-				<button class="btn" id="btn6">Заказать</button>
-			</div>
-		</div>
-	</div>
-    <!-- блок для передачи информации из телеграма в сайт -->
-	<div class="usercard" id="usercard">
-	</div>
-	<!-- обязательно для тг-веб-приложения -->
-	<script src="https://telegram.org/js/telegram-web-app.js"></script>
-	<script src="app.js"></script>
+    <h1>Выберите услугу</h1>
+    <div id="service-selection">
+        <button onclick="selectService('loan')">Взять займ</button>
+        <button onclick="selectService('contract')">Подписать договор</button>
+        <button onclick="selectService('employment')">Найм на работу</button>
+    </div>
+
+    <div id="service-form" style="display:none;"></div>
+
+    <script>
+        function selectService(serviceType) {
+            document.getElementById('service-selection').style.display = 'none';
+            let formHtml = '';
+            switch(serviceType) {
+                case 'loan':
+                    formHtml = '<h2>Форма займа</h2>' +
+                               '<input id="loan-giver" type="text" placeholder="Имя кто дает займ" />' +
+                               '<input id="loan-amount" type="text" placeholder="Сумма" />' +
+                               '<input id="loan-interest" type="text" placeholder="Процент" />' +
+                               '<input id="loan-term" type="text" placeholder="Срок" />' +
+                               '<input id="loan-responsible" type="text" placeholder="Ответственный" />' +
+                               '<input id="loan-receiver" type="text" placeholder="Кто берет займ" />' +
+                               '<button onclick="submitForm(\'loan\')">Отправить</button>';
+                    break;
+                // ... Для других услуг
+            }
+            document.getElementById('service-form').innerHTML = formHtml;
+            document.getElementById('service-form').style.display = 'block';
+        }
+
+        function submitForm(serviceType) {
+            if (serviceType === 'loan') {
+                const loanData = {
+                    giver: document.getElementById('loan-giver').value,
+                    amount: document.getElementById('loan-amount').value,
+                    interest: document.getElementById('loan-interest').value,
+                    term: document.getElementById('loan-term').value,
+                    responsible: document.getElementById('loan-responsible').value,
+                    receiver: document.getElementById('loan-receiver').value
+                };
+                console.log('Loan Data:', loanData);
+                // Здесь вы можете добавить логику для отправки данных в бот
+}
+// Добавьте логику для других услуг, если это необходимо
+alert("Форма отправлена. Обработка данных...");
+}
+</script>
+
 </body>
 </html>
