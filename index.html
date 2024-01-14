@@ -4,6 +4,18 @@
     <meta charset="utf-8">
     <title>Telegram Service Bot</title>
     <script src="https://tg.dev/js/telegram-web-app.js"></script>
+    <style>
+        #service-form input {
+            width: 100%;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        #service-form {
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+    </style>
 </head>
 <body>
     <h1>Выберите услугу</h1>
@@ -36,31 +48,32 @@
             document.getElementById('service-form').innerHTML = formHtml;
             document.getElementById('service-form').style.display = 'block';
             tg.MainButton.show(); // Показываем кнопку отправки
-        }
+       
+    }
 
-        function submitForm(serviceType) {
-            if (serviceType === 'loan') {
-                const loanData = {
-                    giver: document.getElementById('loan-giver').value,
-                    amount: document.getElementById('loan-amount').value,
-                    interest: document.getElementById('loan-interest').value,
-                    term: document.getElementById('loan-term').value,
-                    responsible: document.getElementById('loan-responsible').value,
-                    receiver: document.getElementById('loan-receiver').value
-                };
-                tg.sendData(JSON.stringify(loanData)); // Отправляем данные в Telegram бота
-            }
-            // Добавьте логику для других услуг, если это необходимо
+    function submitForm(serviceType) {
+        if (serviceType === 'loan') {
+            const loanData = {
+                giver: document.getElementById('loan-giver').value,
+                amount: document.getElementById('loan-amount').value,
+                interest: document.getElementById('loan-interest').value,
+                term: document.getElementById('loan-term').value,
+                responsible: document.getElementById('loan-responsible').value,
+                receiver: document.getElementById('loan-receiver').value
+            };
+            tg.sendData(JSON.stringify(loanData)); // Отправляем данные в Telegram бота
         }
+        // Добавьте логику для других услуг, если это необходимо
+    }
 
-        // Настройка Telegram Web App
-        tg.expand(); // Расширяем на весь экран, если нужно
-        tg.MainButton.textColor = '#FFFFFF';
-        tg.MainButton.color = '#2cab37';
-        tg.MainButton.setText("Отправить данные");
-        tg.MainButton.onClick(() => {
-            submitForm('loan'); // Здесь указываем тип услуги
-        });
-    </script>
+    // Настройка Telegram Web App
+    tg.expand(); // Расширяем на весь экран, если нужно
+    tg.MainButton.textColor = '#FFFFFF';
+    tg.MainButton.color = '#2cab37';
+    tg.MainButton.setText("Отправить данные");
+    tg.MainButton.onClick(() => {
+        submitForm('loan'); // Здесь указываем тип услуги
+    });
+</script>
 </body>
 </html>
